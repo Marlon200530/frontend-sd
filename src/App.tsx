@@ -57,11 +57,20 @@ export default function NhluvukoApp() {
 
   const [authView, setAuthView] = useState("landing");
   const [page, setPage] = useState("dashboard");
-  const [selectedResourceId, setSelectedResourceId] = useState<string | null>(null);
-  const [editingResourceId, setEditingResourceId] = useState<string | null>(null);
-  const [toast, setToast] = useState<{ message: string; type: string } | null>(null);
+  const [selectedResourceId, setSelectedResourceId] = useState<string | null>(
+    null,
+  );
+  const [editingResourceId, setEditingResourceId] = useState<string | null>(
+    null,
+  );
+  const [toast, setToast] = useState<{ message: string; type: string } | null>(
+    null,
+  );
 
-  const currentUser = useMemo(() => normalizeUser(meQuery.data), [meQuery.data]);
+  const currentUser = useMemo(
+    () => normalizeUser(meQuery.data),
+    [meQuery.data],
+  );
   const isAuthenticated = Boolean(currentUser);
 
   const categoriesQuery = useQuery({
@@ -99,12 +108,18 @@ export default function NhluvukoApp() {
     enabled: currentUser?.role === "admin",
   });
 
-  const categories = useMemo(() => categoriesQuery.data || [], [categoriesQuery.data]);
+  const categories = useMemo(
+    () => categoriesQuery.data || [],
+    [categoriesQuery.data],
+  );
   const adminCategories = useMemo(
     () => adminCategoriesQuery.data || [],
     [adminCategoriesQuery.data],
   );
-  const resources = useMemo(() => resourcesQuery.data || [], [resourcesQuery.data]);
+  const resources = useMemo(
+    () => resourcesQuery.data || [],
+    [resourcesQuery.data],
+  );
   const loans = useMemo(() => loansQuery.data || [], [loansQuery.data]);
   const notifications = useMemo(
     () => notificationsQuery.data || [],
@@ -127,9 +142,7 @@ export default function NhluvukoApp() {
   const selectedResource = selectedResourceId
     ? resources.find((resource: any) => resource.id === selectedResourceId)
     : null;
-  const unreadNotifications = notifications.filter(
-    (item: any) => !item.read,
-  );
+  const unreadNotifications = notifications.filter((item: any) => !item.read);
 
   function invalidatePlatform() {
     queryClient.invalidateQueries({ queryKey: ["resources"] });
@@ -162,7 +175,10 @@ export default function NhluvukoApp() {
       showToast("Recurso publicado com sucesso.");
     },
     onError: (error) =>
-      showToast(getApiMessage(error, "Não foi possível publicar o recurso."), "error"),
+      showToast(
+        getApiMessage(error, "Não foi possível publicar o recurso."),
+        "error",
+      ),
   });
 
   const updateResourceMutation = useMutation({
@@ -174,7 +190,10 @@ export default function NhluvukoApp() {
       showToast("Recurso actualizado com sucesso.");
     },
     onError: (error) =>
-      showToast(getApiMessage(error, "Não foi possível actualizar o recurso."), "error"),
+      showToast(
+        getApiMessage(error, "Não foi possível actualizar o recurso."),
+        "error",
+      ),
   });
 
   const deleteResourceMutation = useMutation({
@@ -184,11 +203,15 @@ export default function NhluvukoApp() {
       showToast("Recurso removido da plataforma.");
     },
     onError: (error) =>
-      showToast(getApiMessage(error, "Não foi possível remover o recurso."), "error"),
+      showToast(
+        getApiMessage(error, "Não foi possível remover o recurso."),
+        "error",
+      ),
   });
 
   const requestResourceMutation = useMutation({
-    mutationFn: ({ resourceId, dueDate }: any) => createLoan(resourceId, dueDate),
+    mutationFn: ({ resourceId, dueDate }: any) =>
+      createLoan(resourceId, dueDate),
     onSuccess: () => {
       invalidatePlatform();
       setPage("loans");
@@ -196,7 +219,10 @@ export default function NhluvukoApp() {
       showToast("Pedido enviado. Aguarda a aprovação do dono do recurso.");
     },
     onError: (error) =>
-      showToast(getApiMessage(error, "Não foi possível requisitar o recurso."), "error"),
+      showToast(
+        getApiMessage(error, "Não foi possível requisitar o recurso."),
+        "error",
+      ),
   });
 
   const returnLoanMutation = useMutation({
@@ -206,7 +232,10 @@ export default function NhluvukoApp() {
       showToast("Devolução actualizada.");
     },
     onError: (error) =>
-      showToast(getApiMessage(error, "Não foi possível registar a devolução."), "error"),
+      showToast(
+        getApiMessage(error, "Não foi possível registar a devolução."),
+        "error",
+      ),
   });
 
   const profileMutation = useMutation({
@@ -217,7 +246,10 @@ export default function NhluvukoApp() {
       showToast("Perfil actualizado com sucesso.");
     },
     onError: (error) =>
-      showToast(getApiMessage(error, "Não foi possível actualizar o perfil."), "error"),
+      showToast(
+        getApiMessage(error, "Não foi possível actualizar o perfil."),
+        "error",
+      ),
   });
 
   const profilePhotoMutation = useMutation({
@@ -228,7 +260,10 @@ export default function NhluvukoApp() {
       showToast("Foto de perfil actualizada.");
     },
     onError: (error) =>
-      showToast(getApiMessage(error, "Não foi possível actualizar a foto."), "error"),
+      showToast(
+        getApiMessage(error, "Não foi possível actualizar a foto."),
+        "error",
+      ),
   });
 
   const passwordMutation = useMutation({
@@ -236,17 +271,24 @@ export default function NhluvukoApp() {
       changePasswordRequest(oldPassword, newPassword),
     onSuccess: () => showToast("Palavra-passe alterada com sucesso."),
     onError: (error) =>
-      showToast(getApiMessage(error, "Não foi possível alterar a palavra-passe."), "error"),
+      showToast(
+        getApiMessage(error, "Não foi possível alterar a palavra-passe."),
+        "error",
+      ),
   });
 
   const userStatusMutation = useMutation({
-    mutationFn: ({ userId, isActive }: any) => updateUserStatus(userId, isActive),
+    mutationFn: ({ userId, isActive }: any) =>
+      updateUserStatus(userId, isActive),
     onSuccess: () => {
       invalidatePlatform();
       showToast("Estado do utilizador actualizado.");
     },
     onError: (error) =>
-      showToast(getApiMessage(error, "Não foi possível actualizar o utilizador."), "error"),
+      showToast(
+        getApiMessage(error, "Não foi possível actualizar o utilizador."),
+        "error",
+      ),
   });
 
   const moderationMutation = useMutation({
@@ -257,17 +299,24 @@ export default function NhluvukoApp() {
       showToast("Visibilidade do recurso actualizada.");
     },
     onError: (error) =>
-      showToast(getApiMessage(error, "Não foi possível moderar o recurso."), "error"),
+      showToast(
+        getApiMessage(error, "Não foi possível moderar o recurso."),
+        "error",
+      ),
   });
 
   const markReadMutation = useMutation({
     mutationFn: markAllNotificationsRead,
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["notifications"] }),
+    onSuccess: () =>
+      queryClient.invalidateQueries({ queryKey: ["notifications"] }),
   });
 
   const markNotificationsRead = useCallback(() => {
+    if (markReadMutation.isPending) return;
+    if (unreadNotifications.length === 0) return;
+
     markReadMutation.mutate();
-  }, [markReadMutation]);
+  }, [markReadMutation.isPending, unreadNotifications.length]);
 
   const approveLoanMutation = useMutation({
     mutationFn: approveLoanRequest,
@@ -276,7 +325,10 @@ export default function NhluvukoApp() {
       showToast("Requisição aprovada. O recurso ficou requisitado.");
     },
     onError: (error) =>
-      showToast(getApiMessage(error, "Não foi possível aprovar a requisição."), "error"),
+      showToast(
+        getApiMessage(error, "Não foi possível aprovar a requisição."),
+        "error",
+      ),
   });
 
   const rejectLoanMutation = useMutation({
@@ -286,7 +338,10 @@ export default function NhluvukoApp() {
       showToast("Requisição rejeitada.");
     },
     onError: (error) =>
-      showToast(getApiMessage(error, "Não foi possível rejeitar a requisição."), "error"),
+      showToast(
+        getApiMessage(error, "Não foi possível rejeitar a requisição."),
+        "error",
+      ),
   });
 
   const createCategoryMutation = useMutation({
@@ -296,7 +351,10 @@ export default function NhluvukoApp() {
       showToast("Categoria criada com sucesso.");
     },
     onError: (error) =>
-      showToast(getApiMessage(error, "Não foi possível criar a categoria."), "error"),
+      showToast(
+        getApiMessage(error, "Não foi possível criar a categoria."),
+        "error",
+      ),
   });
 
   const updateCategoryMutation = useMutation({
@@ -306,7 +364,10 @@ export default function NhluvukoApp() {
       showToast("Categoria actualizada.");
     },
     onError: (error) =>
-      showToast(getApiMessage(error, "Não foi possível actualizar a categoria."), "error"),
+      showToast(
+        getApiMessage(error, "Não foi possível actualizar a categoria."),
+        "error",
+      ),
   });
 
   useEffect(() => {
@@ -580,7 +641,8 @@ export default function NhluvukoApp() {
                 onCreateCategory={createCategory}
                 onUpdateCategory={updateCategory}
                 isSavingCategory={
-                  createCategoryMutation.isPending || updateCategoryMutation.isPending
+                  createCategoryMutation.isPending ||
+                  updateCategoryMutation.isPending
                 }
               />
             ) : (
