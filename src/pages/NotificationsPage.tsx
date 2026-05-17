@@ -22,23 +22,25 @@ export function NotificationsPage({
   markRead,
 }: any) {
   useEffect(() => {
-    markRead();
-  }, [markRead]);
+    markRead?.();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const ordered = [...notifications].sort(
     (a, b) =>
       new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
   );
 
-  function getLoan(notification) {
-    return loans.find((loan) => loan.id === notification.loanId);
+  function getLoan(notification: any) {
+    return loans.find((loan: any) => loan.id === notification.loanId);
   }
 
-  function getResource(loan) {
-    return resources.find((resource) => resource.id === loan?.resourceId);
+  function getResource(loan: any) {
+    return resources.find((resource: any) => resource.id === loan?.resourceId);
   }
 
-  function getBorrower(loan) {
-    return users.find((user) => user.id === loan?.borrowerId);
+  function getBorrower(loan: any) {
+    return users.find((user: any) => user.id === loan?.borrowerId);
   }
 
   return (
@@ -55,14 +57,16 @@ export function NotificationsPage({
         />
       ) : (
         <div className="space-y-4">
-          {ordered.map((notification) => {
+          {ordered.map((notification: any) => {
             const loan = getLoan(notification);
             const resource = getResource(loan);
             const borrower = getBorrower(loan);
+
             const canModerate =
               notification.type === "loan_created" &&
               loan?.status === "Pendente" &&
               resource?.ownerId === currentUser.id;
+
             const canConfirmReturn =
               loan?.status === "Devolução pendente" &&
               resource?.ownerId === currentUser.id;
@@ -84,6 +88,7 @@ export function NotificationsPage({
                         <Bell className="h-6 w-6" />
                       )}
                     </div>
+
                     <div>
                       <div className="flex flex-wrap items-center gap-2">
                         <Badge
@@ -93,24 +98,28 @@ export function NotificationsPage({
                               : loan?.status === "Devolução pendente"
                                 ? "amber"
                                 : loan?.status === "Activa"
-                                ? "green"
-                                : loan?.status === "Rejeitada"
-                                  ? "red"
-                                  : "grey"
+                                  ? "green"
+                                  : loan?.status === "Rejeitada"
+                                    ? "red"
+                                    : "grey"
                           }
                         >
                           {loan?.status || "Informação"}
                         </Badge>
+
                         {!notification.read && (
                           <Badge variant="dark">Nova</Badge>
                         )}
                       </div>
+
                       <p className="mt-3 font-black text-slate-900">
                         {notification.message}
                       </p>
+
                       <p className="mt-1 text-sm text-slate-500">
                         {formatDateTime(notification.createdAt)}
                       </p>
+
                       {loan && resource && (
                         <div className="mt-4 grid gap-3 text-sm sm:grid-cols-3">
                           <div className="rounded-2xl bg-emerald-50 p-3">
@@ -121,6 +130,7 @@ export function NotificationsPage({
                               {resource.title}
                             </p>
                           </div>
+
                           <div className="rounded-2xl bg-emerald-50 p-3">
                             <p className="text-xs font-bold uppercase text-emerald-700">
                               Estudante
@@ -129,6 +139,7 @@ export function NotificationsPage({
                               {borrower?.name || "Utilizador"}
                             </p>
                           </div>
+
                           <div className="rounded-2xl bg-emerald-50 p-3">
                             <p className="text-xs font-bold uppercase text-emerald-700">
                               Prazo
@@ -151,11 +162,13 @@ export function NotificationsPage({
                         Ver recurso
                       </Button>
                     )}
+
                     {canModerate && (
                       <>
                         <Button onClick={() => onApprove(loan.id)}>
                           <Check className="h-4 w-4" /> Aprovar
                         </Button>
+
                         <Button
                           variant="danger"
                           onClick={() => onReject(loan.id)}
@@ -164,11 +177,13 @@ export function NotificationsPage({
                         </Button>
                       </>
                     )}
+
                     {canConfirmReturn && (
                       <Button onClick={() => onReturn(loan.id)}>
                         <Check className="h-4 w-4" /> Confirmar devolução
                       </Button>
                     )}
+
                     {loan?.status === "Pendente" && !canModerate && (
                       <span className="inline-flex items-center gap-2 rounded-2xl bg-amber-50 px-4 py-2 text-sm font-bold text-amber-700">
                         <Clock className="h-4 w-4" /> A aguardar aprovação
