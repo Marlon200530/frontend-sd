@@ -44,10 +44,10 @@ export function RegisterForm({ setAuthView }: any) {
     "Não foi possível criar a conta. Confirma os dados.";
 
   return (
-    <div className="mx-auto max-w-xl py-10">
-      <div className="rounded-4xl border border-emerald-100 bg-white p-8 shadow-xl shadow-emerald-900/10">
+    <div className="mx-auto w-full max-w-xl py-6 sm:py-10">
+      <div className="rounded-2xl border border-emerald-100 bg-white p-5 shadow-sm shadow-emerald-900/10 sm:p-8">
         <Logo />
-        <h1 className="mt-8 text-3xl font-black text-slate-900">
+        <h1 className="mt-8 text-2xl font-black text-slate-900 sm:text-3xl">
           Criar conta de estudante
         </h1>
         <p className="mt-2 text-sm text-slate-500">
@@ -100,7 +100,7 @@ export function RegisterForm({ setAuthView }: any) {
           </div>
         </form>
         {registerMutation.isError && (
-          <p className="mt-4 rounded-2xl bg-red-50 px-4 py-3 text-sm text-red-700">
+          <p className="mt-4 rounded-xl bg-red-50 px-4 py-3 text-sm text-red-700">
             {serverErrorMessage}
           </p>
         )}

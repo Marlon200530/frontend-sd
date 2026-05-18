@@ -64,11 +64,11 @@ export function LoginForm({ setAuthView }: LoginFormProps) {
     "Não foi possível iniciar sessão. Verifica as credenciais.";
 
   return (
-    <div className="mx-auto max-w-md py-10">
-      <div className="rounded-4xl border border-emerald-100 bg-white p-8 shadow-xl shadow-emerald-900/10">
+    <div className="mx-auto w-full max-w-md py-6 sm:py-10">
+      <div className="rounded-2xl border border-emerald-100 bg-white p-5 shadow-sm shadow-emerald-900/10 sm:p-8">
         <Logo />
 
-        <h1 className="mt-8 text-3xl font-medium text-slate-900">
+        <h1 className="mt-8 text-2xl font-bold text-slate-900 sm:text-3xl">
           Entrar na plataforma
         </h1>
 
@@ -99,7 +99,7 @@ export function LoginForm({ setAuthView }: LoginFormProps) {
           </Field>
 
           {loginMutation.isError && (
-            <p className="rounded-2xl bg-red-50 px-4 py-3 text-sm text-red-700">
+            <p className="rounded-xl bg-red-50 px-4 py-3 text-sm text-red-700">
               {serverErrorMessage}
             </p>
           )}

@@ -76,7 +76,7 @@ export function ResourceForm({ mode, resource, onSubmit, onCancel, categories = 
         description="Preenche os dados principais e adiciona uma imagem para ajudar outros estudantes a reconhecerem o recurso."
       />
       <form onSubmit={submit} className="grid gap-6 lg:grid-cols-[minmax(0,62%)_minmax(280px,1fr)]">
-        <section className="rounded-4xl border border-emerald-100 bg-white p-6 shadow-sm">
+        <section className="rounded-2xl border border-emerald-100 bg-white p-4 shadow-sm sm:p-6">
           <div className="grid gap-4 sm:grid-cols-2">
             <Field label="Título do recurso" error={errors.title}>
               <TextInput
@@ -129,21 +129,21 @@ export function ResourceForm({ mode, resource, onSubmit, onCancel, categories = 
               </Field>
             </div>
           </div>
-          <div className="mt-6 flex flex-wrap gap-3">
-            <Button type="submit" disabled={isSubmitting}>
+          <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            <Button type="submit" disabled={isSubmitting} className="w-full sm:w-auto">
               {isSubmitting
                 ? "A guardar..."
                 : mode === "create"
                   ? "Publicar recurso"
                   : "Guardar alterações"}
             </Button>
-            <Button variant="secondary" onClick={onCancel} disabled={isSubmitting}>
+            <Button variant="secondary" onClick={onCancel} disabled={isSubmitting} className="w-full sm:w-auto">
               Cancelar
             </Button>
           </div>
         </section>
 
-        <aside className="rounded-4xl border border-emerald-100 bg-white p-6 shadow-sm">
+        <aside className="rounded-2xl border border-emerald-100 bg-white p-4 shadow-sm sm:p-6">
           <h3 className="text-lg font-black text-slate-900">
             Imagem do recurso
           </h3>
@@ -151,7 +151,7 @@ export function ResourceForm({ mode, resource, onSubmit, onCancel, categories = 
             Envia uma fotografia clara do recurso para aparecer na listagem e no
             detalhe.
           </p>
-          <div className="mt-5 flex h-48 items-center justify-center overflow-hidden rounded-4xl bg-emerald-50 text-emerald-800">
+          <div className="mt-5 flex h-48 items-center justify-center overflow-hidden rounded-2xl bg-emerald-50 text-emerald-800">
             {isImageSource(form.image) ? (
               <img
                 src={form.image}
@@ -184,7 +184,7 @@ export function ResourceForm({ mode, resource, onSubmit, onCancel, categories = 
           >
             <Upload className="h-4 w-4" /> Escolher imagem
           </Button>
-          <div className="mt-6 rounded-3xl bg-emerald-50 p-4 text-sm text-emerald-900">
+          <div className="mt-6 rounded-2xl bg-emerald-50 p-4 text-sm text-emerald-900">
             <p className="font-black">Pré-visualização</p>
             <p className="mt-2">
               Quando publicares, todos verão: título, categoria,

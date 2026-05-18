@@ -79,8 +79,8 @@ export function Profile({ currentUser, resources, loans, onUpdate, onPassword, o
         title="Perfil do utilizador"
         description="Actualiza os teus dados e acompanha as tuas estatísticas de partilha."
       />
-      <div className="grid gap-6 lg:grid-cols-[1fr_360px]">
-        <section className="rounded-4xl border border-emerald-100 bg-white p-6 shadow-sm">
+      <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_360px]">
+        <section className="rounded-2xl border border-emerald-100 bg-white p-4 shadow-sm sm:p-6">
           <h3 className="text-lg font-black">Dados pessoais</h3>
           <form
             onSubmit={submitProfile}
@@ -155,13 +155,13 @@ export function Profile({ currentUser, resources, loans, onUpdate, onPassword, o
           </div>
         </section>
         <aside className="space-y-4">
-          <div className="rounded-4xl border border-emerald-100 bg-white p-6 text-center shadow-sm">
+          <div className="rounded-2xl border border-emerald-100 bg-white p-4 text-center shadow-sm sm:p-6">
             <UserAvatar
               user={{ ...currentUser, ...profile, photo: photoPreview }}
               className="mx-auto h-24 w-24 text-2xl"
             />
-            <h3 className="mt-4 text-xl font-black">{profile.name}</h3>
-            <p className="text-sm text-slate-500">{profile.email}</p>
+            <h3 className="mt-4 break-words text-lg font-black sm:text-xl">{profile.name}</h3>
+            <p className="break-all text-sm text-slate-500">{profile.email}</p>
             <Badge variant="green">
               {currentUser.role === "admin" ? "Administrador" : "Estudante"}
             </Badge>
@@ -188,7 +188,7 @@ export function Profile({ currentUser, resources, loans, onUpdate, onPassword, o
               )}
             </div>
           </div>
-          <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1">
+          <div className="grid gap-4 sm:grid-cols-3 xl:grid-cols-1">
             <StatCard
               title="Recursos partilhados"
               value={myResources.length}

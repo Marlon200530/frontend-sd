@@ -75,7 +75,7 @@ export function AdminPanel({
         description="Gestão geral da plataforma: utilizadores, recursos, requisições e relatórios."
         action={<Button onClick={onExport}>Exportar CSV</Button>}
       />
-      <div className="grid gap-4 md:grid-cols-4">
+      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
         <StatCard title="Utilizadores" value={users.length} icon={<Users className="h-6 w-6" />} />
         <StatCard title="Recursos" value={resources.length} icon={<BookOpen className="h-6 w-6" />} />
         <StatCard
@@ -92,10 +92,10 @@ export function AdminPanel({
       <section className="grid gap-6 xl:grid-cols-[minmax(0,40%)_minmax(0,60%)]">
         <form
           onSubmit={submitCategory}
-          className="rounded-4xl border border-emerald-100 bg-white p-5 shadow-sm"
+          className="rounded-2xl border border-emerald-100 bg-white p-4 shadow-sm sm:p-5"
         >
           <div className="flex items-center gap-3">
-            <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-emerald-50 text-emerald-700">
+            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald-700">
               <FolderPlus className="h-5 w-5" />
             </span>
             <div>
@@ -130,7 +130,7 @@ export function AdminPanel({
                 placeholder="Breve descrição para uso interno."
               />
             </Field>
-            <label className="flex items-center justify-between rounded-2xl border border-emerald-100 bg-emerald-50/70 px-4 py-3 text-sm font-bold text-emerald-900">
+            <label className="flex items-center justify-between rounded-xl border border-emerald-100 bg-emerald-50/70 px-4 py-3 text-sm font-bold text-emerald-900">
               Categoria activa
               <input
                 type="checkbox"
@@ -144,8 +144,8 @@ export function AdminPanel({
                 className="h-5 w-5 accent-emerald-700"
               />
             </label>
-            <div className="flex flex-wrap gap-2">
-              <Button type="submit" disabled={isSavingCategory}>
+            <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap">
+              <Button type="submit" disabled={isSavingCategory} className="w-full sm:w-auto">
                 {isSavingCategory
                   ? "A guardar..."
                   : editingCategoryId
@@ -153,14 +153,14 @@ export function AdminPanel({
                     : "Criar categoria"}
               </Button>
               {editingCategoryId && (
-                <Button variant="secondary" onClick={resetCategoryForm}>
+                <Button variant="secondary" onClick={resetCategoryForm} className="w-full sm:w-auto">
                   Cancelar edição
                 </Button>
               )}
             </div>
           </div>
         </form>
-        <section className="overflow-hidden rounded-4xl border border-emerald-100 bg-white shadow-sm">
+        <section className="overflow-hidden rounded-2xl border border-emerald-100 bg-white shadow-sm">
           <div className="border-b border-emerald-100 p-5">
             <h3 className="text-lg font-black">Categorias</h3>
           </div>
@@ -172,7 +172,7 @@ export function AdminPanel({
             </div>
           ) : (
             <div className="overflow-x-auto">
-              <table className="w-full min-w-full text-left text-sm">
+              <table className="w-full min-w-[720px] text-left text-sm">
                 <thead className="bg-emerald-50 text-xs uppercase text-emerald-800">
                   <tr>
                     <th className="w-2/5 px-5 py-4">Nome</th>
@@ -212,12 +212,12 @@ export function AdminPanel({
         </section>
       </section>
       <div className="grid gap-6 xl:grid-cols-2">
-        <section className="overflow-hidden rounded-4xl border border-emerald-100 bg-white shadow-sm">
+        <section className="overflow-hidden rounded-2xl border border-emerald-100 bg-white shadow-sm">
           <div className="border-b border-emerald-100 p-5">
             <h3 className="text-lg font-black">Gestão de utilizadores</h3>
           </div>
           <div className="overflow-x-auto">
-            <table className="w-full min-w-155 text-left text-sm">
+            <table className="w-full min-w-[620px] text-left text-sm">
               <thead className="bg-emerald-50 text-xs uppercase text-emerald-800">
                 <tr>
                   <th className="px-5 py-4">Nome</th>
@@ -255,12 +255,12 @@ export function AdminPanel({
             </table>
           </div>
         </section>
-        <section className="overflow-hidden rounded-4xl border border-emerald-100 bg-white shadow-sm">
+        <section className="overflow-hidden rounded-2xl border border-emerald-100 bg-white shadow-sm">
           <div className="border-b border-emerald-100 p-5">
             <h3 className="text-lg font-black">Moderação de recursos</h3>
           </div>
           <div className="overflow-x-auto">
-            <table className="w-full min-w-180 text-left text-sm">
+            <table className="w-full min-w-[720px] text-left text-sm">
               <thead className="bg-emerald-50 text-xs uppercase text-emerald-800">
                 <tr>
                   <th className="px-5 py-4">Recurso</th>
@@ -304,22 +304,6 @@ export function AdminPanel({
           </div>
         </section>
       </div>
-      {/* <section className="rounded-4xl border border-emerald-100 bg-white p-6 shadow-sm">
-        <h3 className="text-lg font-black">Relatório rápido</h3>
-        <div className="mt-4 grid gap-4 md:grid-cols-3">
-          {categories.map((category) => (
-            <div key={category} className="rounded-3xl bg-emerald-50 p-4">
-              <p className="text-sm font-bold text-slate-600">{category}</p>
-              <p className="mt-2 text-2xl font-black text-emerald-800">
-                {
-                  resources.filter((resource) => resource.category === category)
-                    .length
-                }
-              </p>
-            </div>
-          ))}
-        </div>
-      </section> */}
     </div>
   );
 }

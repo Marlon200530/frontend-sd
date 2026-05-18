@@ -35,7 +35,7 @@ export function AuthenticatedLayout({
         />
       )}
       <div
-        className={`fixed inset-y-0 left-0 z-50 w-80 max-w-[86vw] transform bg-white shadow-2xl transition lg:hidden ${mobileOpen ? "translate-x-0" : "-translate-x-full"}`}
+        className={`fixed inset-y-0 left-0 z-50 w-80 max-w-[88vw] transform bg-white shadow-xl transition lg:hidden ${mobileOpen ? "translate-x-0" : "-translate-x-full"}`}
       >
         <Sidebar
           currentUser={currentUser}
@@ -46,7 +46,7 @@ export function AuthenticatedLayout({
         <div className="absolute right-4 top-4">
           <button
             onClick={() => setMobileOpen(false)}
-            className="rounded-2xl border border-emerald-100 bg-white p-2 text-emerald-800 shadow-sm"
+            className="rounded-xl border border-emerald-100 bg-white p-2 text-emerald-800 shadow-sm"
           >
             <X className="h-5 w-5" />
           </button>

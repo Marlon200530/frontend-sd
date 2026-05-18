@@ -59,7 +59,7 @@ export function ExploreResources({
           </Button>
         }
       />
-      <div className="rounded-3xl border border-emerald-100 bg-white p-5 shadow-sm">
+      <div className="rounded-2xl border border-emerald-100 bg-white p-4 shadow-sm sm:p-5">
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-[minmax(0,50%)_minmax(0,23%)_minmax(0,23%)]">
           <TextInput
             placeholder="Pesquisar por título ou descrição..."
@@ -102,7 +102,7 @@ export function ExploreResources({
           description="Tenta remover filtros ou pesquisar por outra palavra-chave."
         />
       ) : (
-        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {paginated.map((resource) => {
             const owner = users.find((user) => user.id === resource.ownerId);
             const hasOpenLoan = loans.some(
@@ -127,11 +127,11 @@ export function ExploreResources({
           })}
         </div>
       )}
-      <div className="flex items-center justify-between rounded-3xl border border-emerald-100 bg-white p-4">
+      <div className="flex flex-col gap-3 rounded-2xl border border-emerald-100 bg-white p-4 sm:flex-row sm:items-center sm:justify-between">
         <p className="text-sm font-semibold text-slate-500">
           Página {pageNumber} de {totalPages} • {filtered.length} resultado(s)
         </p>
-        <div className="flex gap-2">
+        <div className="grid grid-cols-2 gap-2 sm:flex">
           <Button
             variant="secondary"
             disabled={pageNumber === 1}

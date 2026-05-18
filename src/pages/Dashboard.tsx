@@ -30,30 +30,24 @@ export function Dashboard({
 
   return (
     <div className="space-y-6">
-      <div className="rounded-4xl bg-linear-to-br from-emerald-800 to-green-700 p-6 text-white shadow-xl shadow-emerald-900/20">
+      <div className="rounded-2xl bg-emerald-800 p-5 text-white shadow-sm shadow-emerald-900/20 sm:p-6">
         <div className="grid gap-6 lg:grid-cols-[1fr_auto] lg:items-center">
           <div>
-            {/* <Badge variant="dark">MVP funcional</Badge> */}
-            <h2 className="mt-4 text-3xl font-black">
+            <h2 className="text-2xl font-black sm:text-3xl">
               Bem-vindo ao {APP_NAME}
             </h2>
-            {/* <p className="mt-2 max-w-2xl text-emerald-50">
-              Aqui controlas recursos publicados, requisições activas,
-              devoluções e histórico. Todo recurso publicado mostra quem
-              partilhou e desde quando está visível.
-            </p> */}
           </div>
-          <div className="flex flex-wrap gap-3">
-            <Button variant="secondary" onClick={() => setPage("new-resource")}>
+          <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap lg:justify-end">
+            <Button variant="secondary" onClick={() => setPage("new-resource")} className="w-full sm:w-auto">
               <Plus className="h-4 w-4" /> Publicar recurso
             </Button>
-            <Button variant="secondary" onClick={() => setPage("explore")}>
+            <Button variant="secondary" onClick={() => setPage("explore")} className="w-full sm:w-auto">
               Explorar recursos
             </Button>
           </div>
         </div>
       </div>
-      <div className="grid gap-4 md:grid-cols-4">
+      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
         <StatCard
           title="Disponíveis"
           value={available.length}
@@ -76,8 +70,8 @@ export function Dashboard({
         />
       </div>
       <div className="">
-        <div className="rounded-3xl border border-emerald-100 bg-white p-5 shadow-sm">
-          <div className="mb-4 flex items-center justify-between">
+        <div className="rounded-2xl border border-emerald-100 bg-white p-4 shadow-sm sm:p-5">
+          <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <h3 className="text-lg font-black">Recursos recentes</h3>
             <Button variant="ghost" onClick={() => setPage("explore")}>
               Ver todos
@@ -90,9 +84,9 @@ export function Dashboard({
                 <button
                   key={resource.id}
                   onClick={() => setSelectedResourceId(resource.id)}
-                  className="flex w-full items-center gap-4 rounded-3xl border border-emerald-50 p-4 text-left transition hover:bg-emerald-50"
+                  className="flex w-full flex-col gap-3 rounded-2xl border border-emerald-50 p-4 text-left transition hover:bg-emerald-50 sm:flex-row sm:items-center sm:gap-4"
                 >
-                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-50 text-emerald-700">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald-700">
                     <ResourceIcon type={resource.image} className="h-6 w-6" />
                   </div>
                   <div className="min-w-0 flex-1">

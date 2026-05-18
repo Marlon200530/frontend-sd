@@ -34,11 +34,11 @@ export function MyLoans({
             return (
               <div
                 key={loan.id}
-                className="rounded-4xl border border-emerald-100 bg-white p-5 shadow-sm"
+                className="rounded-2xl border border-emerald-100 bg-white p-4 shadow-sm sm:p-5"
               >
-                <div className="flex items-start justify-between gap-4">
+                <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
                   <div className="flex items-start gap-4">
-                    <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-emerald-50 text-emerald-700">
+                    <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald-700">
                       <ResourceIcon type={resource?.image} className="h-7 w-7" />
                     </div>
                     <div>
@@ -73,16 +73,18 @@ export function MyLoans({
                     value={formatDate(loan.returnedAt)}
                   />
                 </div>
-                <div className="mt-5 flex flex-wrap gap-2">
+                <div className="mt-5 flex flex-col gap-2 sm:flex-row sm:flex-wrap">
                   <Button
                     variant="secondary"
                     onClick={() => resource && onOpen(resource.id)}
+                    className="w-full sm:w-auto"
                   >
                     Ver recurso
                   </Button>
                   <Button
                     disabled={!canRequestReturn}
                     onClick={() => onReturn(loan.id)}
+                    className="w-full sm:w-auto"
                   >
                     Pedir devolução
                   </Button>

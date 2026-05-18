@@ -45,13 +45,13 @@ export function ResourceDetail({
       <Button variant="ghost" onClick={onBack}>
         Voltar
       </Button>
-      <div className="grid gap-6 lg:grid-cols-[1fr_360px]">
-        <section className="rounded-4xl border border-emerald-100 bg-white p-6 shadow-sm">
+      <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_360px]">
+        <section className="rounded-2xl border border-emerald-100 bg-white p-4 shadow-sm sm:p-6">
           <div className="flex flex-col gap-6">
             <button
               type="button"
               onClick={() => hasPhoto && setImageOpen(true)}
-              className={`h-80 overflow-hidden rounded-4xl bg-emerald-50 text-emerald-700 ${hasPhoto ? "cursor-zoom-in" : "cursor-default"}`}
+              className={`h-56 overflow-hidden rounded-2xl bg-emerald-50 text-emerald-700 sm:h-80 ${hasPhoto ? "cursor-zoom-in" : "cursor-default"}`}
               aria-label={hasPhoto ? "Ampliar imagem do recurso" : undefined}
             >
               {hasPhoto ? (
@@ -61,8 +61,8 @@ export function ResourceDetail({
                   className="h-full w-full object-cover"
                 />
               ) : (
-                <div className="flex h-full w-full items-center justify-center bg-linear-to-br from-emerald-50 to-lime-100">
-                  <ResourceIcon type={resource.image} className="h-28 w-28" />
+                <div className="flex h-full w-full items-center justify-center bg-emerald-50">
+                  <ResourceIcon type={resource.image} className="h-20 w-20 sm:h-28 sm:w-28" />
                 </div>
               )}
             </button>
@@ -75,7 +75,7 @@ export function ResourceDetail({
                 </Badge>
                 <Badge variant="grey">{resource.category}</Badge>
               </div>
-              <h2 className="mt-4 text-3xl font-black text-slate-900">
+              <h2 className="mt-4 text-2xl font-black text-slate-900 sm:text-3xl">
                 {resource.title}
               </h2>
               <p className="mt-4 leading-7 text-slate-600">
@@ -99,23 +99,23 @@ export function ResourceDetail({
             </div>
           </div>
         </section>
-        <aside className="rounded-4xl border border-emerald-100 bg-white p-6 shadow-sm">
+        <aside className="rounded-2xl border border-emerald-100 bg-white p-4 shadow-sm sm:p-6 xl:sticky xl:top-24 xl:self-start">
           <h3 className="text-xl font-black text-slate-900">
             Requisitar recurso
           </h3>
           {resource.ownerId === currentUser.id ? (
-            <p className="mt-3 rounded-2xl bg-emerald-50 p-4 text-sm text-emerald-800">
+            <p className="mt-3 rounded-xl bg-emerald-50 p-4 text-sm text-emerald-800">
               Este recurso pertence a ti. Podes editá-lo na área “Meus
               recursos”.
             </p>
           ) : myOpenLoan ? (
-            <p className="mt-3 rounded-2xl bg-amber-50 p-4 text-sm text-amber-800">
+            <p className="mt-3 rounded-xl bg-amber-50 p-4 text-sm text-amber-800">
               Já tens uma requisição {myOpenLoan.status.toLowerCase()} para este
               recurso. Só podes pedir novamente depois de devolveres ou se o
               pedido for rejeitado.
             </p>
           ) : resource.status !== "Disponível" ? (
-            <p className="mt-3 rounded-2xl bg-amber-50 p-4 text-sm text-amber-800">
+            <p className="mt-3 rounded-xl bg-amber-50 p-4 text-sm text-amber-800">
               Este recurso já está requisitado. Aguarda a devolução.
             </p>
           ) : (
@@ -153,7 +153,7 @@ export function ResourceDetail({
                   return (
                     <div
                       key={loan.id}
-                      className="rounded-2xl bg-emerald-50 p-3 text-sm"
+                      className="rounded-xl bg-emerald-50 p-3 text-sm"
                     >
                       <p className="font-bold text-slate-800">
                         {borrower?.name || "Utilizador"}
@@ -180,7 +180,7 @@ export function ResourceDetail({
           <button
             type="button"
             onClick={() => setImageOpen(false)}
-            className="absolute right-4 top-4 rounded-2xl bg-white/10 p-3 text-white backdrop-blur transition hover:bg-white/20"
+            className="absolute right-4 top-4 rounded-xl bg-white/10 p-3 text-white backdrop-blur transition hover:bg-white/20"
             aria-label="Fechar imagem ampliada"
           >
             <X className="h-6 w-6" />
@@ -188,7 +188,7 @@ export function ResourceDetail({
           <img
             src={resource.image}
             alt={resource.title}
-            className="max-h-[90vh] max-w-[94vw] rounded-3xl object-contain shadow-2xl"
+            className="max-h-[90vh] max-w-[94vw] rounded-2xl object-contain shadow-xl"
             onClick={(event) => event.stopPropagation()}
           />
         </div>

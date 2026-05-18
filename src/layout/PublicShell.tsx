@@ -13,16 +13,16 @@ export function PublicShell({
   return (
     <div>
       {authView === "landing" && (
-        <header className="mx-auto flex max-w-7xl items-center justify-between px-4 py-6 sm:px-6 lg:px-8">
+        <header className="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
           <Logo />
-          <div className="flex items-center gap-2">
-            <Button variant="ghost" onClick={() => setAuthView("landing")}>
+          <div className="flex w-full flex-wrap items-center gap-2 sm:w-auto sm:justify-end">
+            <Button variant="ghost" onClick={() => setAuthView("landing")} className="flex-1 sm:flex-none">
               Início
             </Button>
-            <Button variant="secondary" onClick={() => setAuthView("login")}>
+            <Button variant="secondary" onClick={() => setAuthView("login")} className="flex-1 sm:flex-none">
               Entrar
             </Button>
-            <Button onClick={() => setAuthView("register")}>
+            <Button onClick={() => setAuthView("register")} className="basis-full sm:basis-auto">
               <UserPlus className="h-4 w-4" /> Criar conta
             </Button>
           </div>

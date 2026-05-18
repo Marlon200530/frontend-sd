@@ -310,13 +310,15 @@ export default function NhluvukoApp() {
     onSuccess: () =>
       queryClient.invalidateQueries({ queryKey: ["notifications"] }),
   });
+  const markRead = markReadMutation.mutate;
+  const isMarkingRead = markReadMutation.isPending;
 
   const markNotificationsRead = useCallback(() => {
-    if (markReadMutation.isPending) return;
+    if (isMarkingRead) return;
     if (unreadNotifications.length === 0) return;
 
-    markReadMutation.mutate();
-  }, [markReadMutation.isPending, unreadNotifications.length]);
+    markRead();
+  }, [isMarkingRead, markRead, unreadNotifications.length]);
 
   const approveLoanMutation = useMutation({
     mutationFn: approveLoanRequest,
@@ -500,7 +502,7 @@ export default function NhluvukoApp() {
 
   if (!currentUser) {
     return (
-      <div className="min-h-screen bg-linear-to-br from-emerald-50 via-white to-green-100 text-slate-900">
+      <div className="min-h-screen bg-emerald-50/70 text-slate-900">
         <Toast toast={toast} />
         <PublicShell
           setAuthView={setAuthView}

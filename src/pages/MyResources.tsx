@@ -25,9 +25,9 @@ export function MyResources({
           description="Publica o teu primeiro recurso para que outros estudantes possam requisitá-lo."
         />
       ) : (
-        <div className="overflow-hidden rounded-4xl border border-emerald-100 bg-white shadow-sm">
+        <div className="overflow-hidden rounded-2xl border border-emerald-100 bg-white shadow-sm">
           <div className="overflow-x-auto">
-            <table className="w-full min-w-225 text-left text-sm">
+            <table className="w-full min-w-[900px] text-left text-sm">
               <thead className="bg-emerald-50 text-xs uppercase tracking-wide text-emerald-800">
                 <tr>
                   <th className="px-5 py-4">Recurso</th>
@@ -113,7 +113,7 @@ export function MyResources({
           </div>
         </div>
       )}
-      <div className="rounded-3xl border border-emerald-100 bg-white p-5 shadow-sm">
+      <div className="rounded-2xl border border-emerald-100 bg-white p-4 shadow-sm sm:p-5">
         <h3 className="text-lg font-black text-slate-900">
           Histórico dos meus recursos
         </h3>
@@ -138,7 +138,7 @@ export function MyResources({
                 return (
                   <div
                     key={loan.id}
-                    className="flex flex-col gap-3 rounded-3xl bg-emerald-50 p-4 text-sm sm:flex-row sm:items-center sm:justify-between"
+                    className="flex flex-col gap-3 rounded-2xl bg-emerald-50 p-4 text-sm lg:flex-row lg:items-center lg:justify-between"
                   >
                     <div>
                       <strong>{resource?.title}</strong> requisitado por{" "}
@@ -146,7 +146,7 @@ export function MyResources({
                       {loan.status}
                     </div>
                     {canMarkReturned && (
-                      <Button onClick={() => onReturn(loan.id)}>
+                      <Button onClick={() => onReturn(loan.id)} className="w-full sm:w-auto">
                         {loan.status === "Devolução pendente"
                           ? "Confirmar devolução"
                           : "Marcar devolução"}

@@ -74,11 +74,11 @@ export function NotificationsPage({
             return (
               <section
                 key={notification.id}
-                className="rounded-4xl border border-emerald-100 bg-white p-5 shadow-sm"
+                className="rounded-2xl border border-emerald-100 bg-white p-4 shadow-sm sm:p-5"
               >
                 <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
                   <div className="flex gap-4">
-                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-emerald-50 text-emerald-700">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald-700">
                       {resource ? (
                         <ResourceIcon
                           type={resource.image}
@@ -122,7 +122,7 @@ export function NotificationsPage({
 
                       {loan && resource && (
                         <div className="mt-4 grid gap-3 text-sm sm:grid-cols-3">
-                          <div className="rounded-2xl bg-emerald-50 p-3">
+                          <div className="rounded-xl bg-emerald-50 p-3">
                             <p className="text-xs font-bold uppercase text-emerald-700">
                               Recurso
                             </p>
@@ -131,7 +131,7 @@ export function NotificationsPage({
                             </p>
                           </div>
 
-                          <div className="rounded-2xl bg-emerald-50 p-3">
+                          <div className="rounded-xl bg-emerald-50 p-3">
                             <p className="text-xs font-bold uppercase text-emerald-700">
                               Estudante
                             </p>
@@ -140,7 +140,7 @@ export function NotificationsPage({
                             </p>
                           </div>
 
-                          <div className="rounded-2xl bg-emerald-50 p-3">
+                          <div className="rounded-xl bg-emerald-50 p-3">
                             <p className="text-xs font-bold uppercase text-emerald-700">
                               Prazo
                             </p>
@@ -153,11 +153,12 @@ export function NotificationsPage({
                     </div>
                   </div>
 
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap lg:justify-end">
                     {resource && (
                       <Button
                         variant="secondary"
                         onClick={() => onOpenResource(resource.id)}
+                        className="w-full sm:w-auto"
                       >
                         Ver recurso
                       </Button>
@@ -165,13 +166,14 @@ export function NotificationsPage({
 
                     {canModerate && (
                       <>
-                        <Button onClick={() => onApprove(loan.id)}>
+                        <Button onClick={() => onApprove(loan.id)} className="w-full sm:w-auto">
                           <Check className="h-4 w-4" /> Aprovar
                         </Button>
 
                         <Button
                           variant="danger"
                           onClick={() => onReject(loan.id)}
+                          className="w-full sm:w-auto"
                         >
                           <X className="h-4 w-4" /> Rejeitar
                         </Button>
@@ -179,13 +181,13 @@ export function NotificationsPage({
                     )}
 
                     {canConfirmReturn && (
-                      <Button onClick={() => onReturn(loan.id)}>
+                      <Button onClick={() => onReturn(loan.id)} className="w-full sm:w-auto">
                         <Check className="h-4 w-4" /> Confirmar devolução
                       </Button>
                     )}
 
                     {loan?.status === "Pendente" && !canModerate && (
-                      <span className="inline-flex items-center gap-2 rounded-2xl bg-amber-50 px-4 py-2 text-sm font-bold text-amber-700">
+                      <span className="inline-flex items-center justify-center gap-2 rounded-xl bg-amber-50 px-4 py-2 text-sm font-bold text-amber-700">
                         <Clock className="h-4 w-4" /> A aguardar aprovação
                       </span>
                     )}

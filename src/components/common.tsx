@@ -52,7 +52,7 @@ export function ResourceIcon({
       <img
         src={type}
         alt=""
-        className={`${className} rounded-2xl object-cover`}
+        className={`${className} rounded-xl object-cover`}
       />
     );
   }
@@ -81,14 +81,14 @@ export function UserAvatar({
       <img
         src={user.photo}
         alt={user.name || "Utilizador"}
-        className={`${className} rounded-2xl object-cover`}
+        className={`${className} rounded-xl object-cover`}
       />
     );
   }
 
   return (
     <div
-      className={`${className} flex items-center justify-center rounded-2xl bg-emerald-700 font-black text-white`}
+      className={`${className} flex items-center justify-center rounded-xl bg-emerald-700 font-black text-white`}
     >
       {user?.photo || initials}
     </div>
@@ -104,7 +104,7 @@ export function IconBubble({
 }) {
   return (
     <div
-      className={`flex items-center justify-center rounded-3xl bg-linear-to-br from-emerald-50 to-lime-100 text-emerald-800 ring-1 ring-emerald-100 ${className}`}
+      className={`flex items-center justify-center rounded-2xl bg-emerald-50 text-emerald-800 ring-1 ring-emerald-100 ${className}`}
     >
       {children}
     </div>
@@ -127,7 +127,7 @@ export function Badge({
   };
   return (
     <span
-      className={`inline-flex items-center rounded-full border px-2.5 py-1 text-xs font-semibold ${variants[variant]}`}
+      className={`inline-flex max-w-full items-center rounded-full border px-2.5 py-1 text-xs font-semibold leading-none ${variants[variant]}`}
     >
       {children}
     </span>
@@ -163,7 +163,7 @@ export function Button({
       type={type}
       onClick={onClick}
       disabled={disabled}
-      className={`inline-flex items-center justify-center gap-2 rounded-2xl px-4 py-2 text-sm font-semibold transition disabled:cursor-not-allowed disabled:opacity-50 ${variants[variant]} ${className}`}
+      className={`inline-flex min-h-10 items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold leading-tight transition disabled:cursor-not-allowed disabled:opacity-50 ${variants[variant]} ${className}`}
     >
       {children}
     </button>
@@ -198,7 +198,7 @@ export function TextInput(props: React.InputHTMLAttributes<HTMLInputElement>) {
   return (
     <input
       {...props}
-      className={`w-full rounded-2xl border border-emerald-100 bg-white px-4 py-3 text-sm outline-none ring-0 transition placeholder:text-slate-400 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100 ${props.className || ""}`}
+      className={`w-full rounded-xl border border-emerald-100 bg-white px-4 py-3 text-base outline-none ring-0 transition placeholder:text-slate-400 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100 sm:text-sm ${props.className || ""}`}
     />
   );
 }
@@ -207,7 +207,7 @@ export function SelectInput(props: React.SelectHTMLAttributes<HTMLSelectElement>
   return (
     <select
       {...props}
-      className={`min-w-0 w-full max-w-full rounded-2xl border border-emerald-100 bg-white px-4 py-3 text-sm outline-none transition focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100 ${props.className || ""}`}
+      className={`min-w-0 w-full max-w-full rounded-xl border border-emerald-100 bg-white px-4 py-3 text-base outline-none transition focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100 sm:text-sm ${props.className || ""}`}
     />
   );
 }
@@ -216,7 +216,7 @@ export function TextArea(props: React.TextareaHTMLAttributes<HTMLTextAreaElement
   return (
     <textarea
       {...props}
-      className={`w-full rounded-2xl border border-emerald-100 bg-white px-4 py-3 text-sm outline-none transition placeholder:text-slate-400 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100 ${props.className || ""}`}
+      className={`w-full rounded-xl border border-emerald-100 bg-white px-4 py-3 text-base outline-none transition placeholder:text-slate-400 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100 sm:text-sm ${props.className || ""}`}
     />
   );
 }
@@ -231,8 +231,8 @@ export function EmptyState({
   action?: React.ReactNode;
 }) {
   return (
-    <div className="rounded-3xl border border-dashed border-emerald-200 bg-white p-10 text-center">
-      <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-3xl bg-emerald-50 text-emerald-700">
+    <div className="rounded-2xl border border-dashed border-emerald-200 bg-white p-6 text-center sm:p-10">
+      <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-emerald-50 text-emerald-700">
         <Sprout className="h-7 w-7" />
       </div>
       <h3 className="text-lg font-bold text-slate-900">{title}</h3>
@@ -249,8 +249,8 @@ export function ResourceCard({ resource, owner, onOpen, canRequest }: any) {
   const displayOwner = owner || resource.owner;
 
   return (
-    <div className="animate-card-enter group flex h-full flex-col overflow-hidden rounded-4xl border border-emerald-100 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-emerald-900/10">
-      <div className="relative h-52 overflow-hidden bg-emerald-50">
+    <div className="animate-card-enter group flex h-full flex-col overflow-hidden rounded-2xl border border-emerald-100 bg-white shadow-sm transition duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-emerald-900/10">
+      <div className="relative h-44 overflow-hidden bg-emerald-50 sm:h-52">
         {hasPhoto ? (
           <img
             src={resource.image}
@@ -258,27 +258,27 @@ export function ResourceCard({ resource, owner, onOpen, canRequest }: any) {
             className="h-full w-full object-cover transition duration-300 group-hover:scale-105"
           />
         ) : (
-          <div className="flex h-full w-full items-center justify-center bg-linear-to-br from-emerald-50 to-lime-100 text-emerald-800">
-            <ResourceIcon type={resource.image} className="h-20 w-20" />
+          <div className="flex h-full w-full items-center justify-center bg-emerald-50 text-emerald-800">
+            <ResourceIcon type={resource.image} className="h-16 w-16 sm:h-20 sm:w-20" />
           </div>
         )}
-        <div className="absolute right-4 top-4">
+        <div className="absolute right-3 top-3 sm:right-4 sm:top-4">
           <Badge variant={resource.status === "Disponível" ? "green" : "amber"}>
             {resource.status}
           </Badge>
         </div>
       </div>
-      <div className="flex flex-1 flex-col p-5">
+      <div className="flex flex-1 flex-col p-4 sm:p-5">
         <div className="flex flex-wrap gap-2">
           <Badge variant="grey">{resource.category}</Badge>
         </div>
-        <h3 className="mt-3 text-lg font-extrabold leading-snug text-slate-900">
+        <h3 className="mt-3 text-base font-extrabold leading-snug text-slate-900 sm:text-lg">
           {resource.title}
         </h3>
         <p className="mt-2 line-clamp-3 text-sm leading-6 text-slate-500">
           {resource.description}
         </p>
-        <div className="mt-5 rounded-3xl bg-linear-to-br from-emerald-50 to-white p-3 text-xs text-emerald-950 ring-1 ring-emerald-100">
+        <div className="mt-5 rounded-2xl bg-emerald-50/80 p-3 text-xs text-emerald-950 ring-1 ring-emerald-100">
           <p>
             <strong>Partilhado por:</strong>{" "}
             {displayOwner?.name || "Utilizador"}
@@ -316,7 +316,7 @@ export function SkeletonBlock({ className = "" }: { className?: string }) {
 
 export function ResourceCardSkeleton() {
   return (
-    <div className="animate-card-enter overflow-hidden rounded-4xl border border-emerald-100 bg-white shadow-sm">
+    <div className="animate-card-enter overflow-hidden rounded-2xl border border-emerald-100 bg-white shadow-sm">
       <SkeletonBlock className="h-52 rounded-none" />
       <div className="space-y-4 p-5">
         <SkeletonBlock className="h-6 w-24" />
@@ -342,7 +342,7 @@ export function ResourceCardSkeleton() {
 export function AppLoadingSkeleton() {
   return (
     <div className="animate-fade-in space-y-6">
-      <div className="overflow-hidden rounded-4xl border border-emerald-100 bg-white p-6 shadow-sm">
+      <div className="overflow-hidden rounded-2xl border border-emerald-100 bg-white p-5 shadow-sm sm:p-6">
         <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
           <div className="space-y-3">
             <SkeletonBlock className="h-9 w-64 max-w-full" />
@@ -388,12 +388,12 @@ export function StatCard({
   icon: React.ReactNode;
 }) {
   return (
-    <div className="animate-card-enter rounded-3xl border border-emerald-100 bg-white p-5 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-emerald-900/5">
+    <div className="animate-card-enter rounded-2xl border border-emerald-100 bg-white p-4 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:shadow-md hover:shadow-emerald-900/5 sm:p-5">
       <div className="flex items-center justify-between">
         <p className="text-sm font-bold text-slate-500">{title}</p>
         <span className="text-emerald-700">{icon}</span>
       </div>
-      <p className="mt-3 text-3xl font-black text-emerald-800">{value}</p>
+      <p className="mt-3 text-2xl font-black text-emerald-800 sm:text-3xl">{value}</p>
     </div>
   );
 }
@@ -410,8 +410,8 @@ export function PageHeader({
 }) {
   return (
     <div className="animate-fade-in flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-      <div>
-        <h2 className="text-3xl font-black tracking-tight text-slate-900">
+      <div className="min-w-0">
+        <h2 className="text-2xl font-black text-slate-900 sm:text-3xl">
           {title}
         </h2>
         <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-500">
@@ -426,7 +426,7 @@ export function PageHeader({
 
 export function InfoBox({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-3xl bg-emerald-50 p-4">
+    <div className="rounded-2xl bg-emerald-50 p-4">
       <p className="text-xs font-bold uppercase tracking-wide text-emerald-700">
         {label}
       </p>
